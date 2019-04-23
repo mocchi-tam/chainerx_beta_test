@@ -5,8 +5,8 @@ set(ENV{CXX} "$ENV{HOME}/local/gcc/bin/g++")
 cmake_minimum_required(VERSION 3.14)
 project( train_mnist )
 
-set(CHX_DIR $ENV{HOME}/local)
-set(CHX_INC_DIR ${CHX_DIR}/chainerx_cc/build)
+set(CHX_DIR $ENV{HOME}/local/lib/python3.6/site-package/chainerx)
+set(CHX_INC_DIR $ENV{HOME}/local/include)
 
 add_executable(${PROJECT_NAME}
   mnist.cc
@@ -15,18 +15,16 @@ add_executable(${PROJECT_NAME}
 
 # include
 set(INCLUDE_DIR
-  ${CHX_DIR}/include
-  ${CHX_INC_DIR}/gsl-lite/include
-  ${CHX_INC_DIR}/optional-lite/include
+  ${CHX_INC_DIR}
 )
 
 target_include_directries(${PROJECT_NAME}
-  PRIVATE "${INCLUDE_DIR}"
+  PUBLIC "${INCLUDE_DIR}"
 )
 
 # lib
 set(LIBRARIES
-  ${CHX_DIR}/lib/libchainerx.so
+  ${CHX_DIR}/libchainerx.so
 )
 
 target_link_libraries(${PROJECT_NAME}
